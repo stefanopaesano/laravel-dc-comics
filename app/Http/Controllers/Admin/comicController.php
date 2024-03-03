@@ -64,9 +64,18 @@ class ComicController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,Comic $comic)
     {
-        //
+        
+        $comicsData = $request->all();
+
+       
+
+        $comic->update($comicsData);
+
+        
+
+        return redirect()->route('comics.index', ['comic' => $comic->id]);
     }
 
     /**
