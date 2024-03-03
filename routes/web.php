@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\ComicController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Admin\comicController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,4 +13,4 @@ use App\Http\Controllers\Admin\comicController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::resource('comics', comicController::class);
+Route::resource('comics',ComicController::class);

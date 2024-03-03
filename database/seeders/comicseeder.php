@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Comic;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ComicsSeeder extends Seeder
+use App\Models\Comic;
+class ComicSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -29,7 +29,6 @@ class ComicsSeeder extends Seeder
             $comic->artist = implode(',', $single_comics['artists']);
             $comic->writers = implode(',', $single_comics['writers']);
             $comic->save();
-
         }
     }
 }

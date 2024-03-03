@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Comic;
 
-use App\Models\comics;
-
-class comicController extends Controller
+class ComicController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -57,9 +56,9 @@ class comicController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Comic $comic)
     {
-        //
+        return view('comics.edit', compact('comic'));
     }
 
     /**
@@ -78,3 +77,4 @@ class comicController extends Controller
         //
     }
 }
+
