@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Comic;
 
+use App\Http\Requests\Request\UpdateComicRequest;
+use App\Http\Requests\Request\StoreComicRequest;
+
 class ComicController extends Controller
 {
     /**
@@ -29,20 +32,23 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        $comics_data = $request->all();
-        $comic = new Comic();
-        $comic->title = $comics_data['title'];
-        $comic->description = $comics_data['description'];
-        $comic->thumb = $comics_data['thumb'];
-        $comic->price = $comics_data['price'];
-        $comic->series = $comics_data['series'];
-        $comic->sale_date = $comics_data['sale_date'];
-        $comic->type = $comics_data['type'];
-        $comic->artist = $comics_data['artists'];
-        $comic->writers = $comics_data['writers'];
-        $comic->save();
+        $comic = Comic::create($request->all());
 
-         return redirect()->route('comics.show', ['comic' => $comic->id]);
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'thumb' => 'required|string',
+            'price' => 'required|numeric',
+            'series' => 'required|string',
+            'sale_date' => 'required|date',
+            'type' => 'required|string',
+            'artists' => 'required|string',
+            'writers' => 'required|string',
+        ]);
+    
+        $comic = Comic::create($request->all());
+    
+        return redirect()->route('comics.show', ['comic' => $comic->id]);
     }
 
     /**
@@ -64,17 +70,22 @@ class ComicController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,Comic $comic)
+    public function update(Request $request, Comic $comic)
     {
-        
-        $comicsData = $request->all();
-
-       
-
-        $comic->update($comicsData);
-
-        
-
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'thumb' => 'required|string',
+            'price' => 'required|numeric',
+            'series' => 'required|string',
+            'sale_date' => 'required|date',
+            'type' => 'required|string',
+            'artists' => 'required|string',
+            'writers' => 'required|string',
+        ]);
+    
+        $comic->update($request->all());
+    
         return redirect()->route('comics.index', ['comic' => $comic->id]);
     }
 

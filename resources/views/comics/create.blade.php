@@ -6,6 +6,17 @@
 <h1>
     Comics create
 </h1>
+@if (errors->eny())
+<div class="alert alert-denger"></div>
+<ul>
+    @foreach (errors all() as $error)
+    <li>{{ error }}</li>
+        
+    @endforeach
+</ul>
+@endif
+    
+@endif
 
 <h2>
     <div class="row">
